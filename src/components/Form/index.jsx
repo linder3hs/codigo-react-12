@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { post } from "../../services";
 
 export default function Form() {
   const [inputData, setInputData] = useState({
@@ -9,10 +10,19 @@ export default function Form() {
   });
 
   const handleInputChange = (event) => {
+    // event.target = <input name="email" value="linder@gmail.com" type="email" />
+    const { name, type, checked, value } = event.target;
+
     setInputData({
       ...inputData,
-      [event.target.name]: event.target.value,
+      [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = await post(inputData);
+    console.log(data);
   };
 
   return (
@@ -20,7 +30,7 @@ export default function Form() {
       <div className="card">
         <div className="card-body">
           <h2>Formulario</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <input
                 value={inputData.name}
