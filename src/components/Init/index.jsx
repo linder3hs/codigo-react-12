@@ -8,6 +8,7 @@ export default function Init() {
   const handleInputChange = (e) => {
     setNombre(e.target.value);
   };
+  
   return (
     <div>
       <Header nombre="Linder" apellido="Hassinger" dni="8888888" />
