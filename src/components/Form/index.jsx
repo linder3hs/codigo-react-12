@@ -66,7 +66,7 @@ export default function Form() {
                 name="name"
               />
             </div>
-            <div class="valid-feedback">Bien hecho</div>
+            <div className="valid-feedback">Bien hecho</div>
             <div>
               <input
                 required
@@ -100,7 +100,7 @@ export default function Form() {
                 onChange={handleInputChange}
                 name="terms"
               />{" "}
-              <label class="form-check-label" htmlFor="invalidCheck">
+              <label className="form-check-label" htmlFor="invalidCheck">
                 Acepta los terminos y condiciones?
               </label>
             </div>
