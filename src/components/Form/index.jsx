@@ -9,6 +9,8 @@ export default function Form() {
     terms: false,
   });
 
+  const [showValidation, setShowValidation] = useState("");
+
   const handleInputChange = (event) => {
     // event.target = <input name="email" value="linder@gmail.com" type="email" />
     const { name, type, checked, value } = event.target;
@@ -21,6 +23,9 @@ export default function Form() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setShowValidation("was-validated");
+
     const data = await post(inputData);
     console.log(data);
   };
@@ -30,9 +35,14 @@ export default function Form() {
       <div className="card">
         <div className="card-body">
           <h2>Formulario</h2>
-          <form onSubmit={handleSubmit}>
+          <form
+            className={`needs-validation ${showValidation}`}
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <div>
               <input
+                required
                 value={inputData.name}
                 className="form-control mt-3"
                 placeholder="Write your name"
@@ -41,8 +51,10 @@ export default function Form() {
                 name="name"
               />
             </div>
+            <div class="valid-feedback">Bien hecho</div>
             <div>
               <input
+                required
                 value={inputData.email}
                 className="form-control mt-3"
                 placeholder="Write your email"
@@ -53,6 +65,7 @@ export default function Form() {
             </div>
             <div>
               <input
+                required
                 value={inputData.password}
                 className="form-control mt-3"
                 placeholder="Write your password"
@@ -61,16 +74,20 @@ export default function Form() {
                 name="password"
               />
             </div>
-            <div>
+            <div className="mt-3">
               <input
-                className="mt-3"
+                id="invalidCheck"
+                required
+                className="form-check-input"
                 checked={inputData.terms}
                 value={inputData.terms}
                 type="checkbox"
                 onChange={handleInputChange}
                 name="terms"
               />{" "}
-              Acepta los terminos y condiciones?
+              <label class="form-check-label" for="invalidCheck">
+                Acepta los terminos y condiciones?
+              </label>
             </div>
             <div>
               <button className="mt-3 btn btn-primary" type="submit">
