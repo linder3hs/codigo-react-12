@@ -12,8 +12,7 @@ export const post = async (body) => {
     });
 
     if (!response.ok) {
-      alert("Hubo un error");
-      return;
+      return false;
     }
 
     const data = await response.json();

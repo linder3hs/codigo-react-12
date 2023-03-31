@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { post } from "../../services";
+import Swal from "sweetalert2";
 
 export default function Form() {
   const [inputData, setInputData] = useState({
@@ -27,7 +28,21 @@ export default function Form() {
     setShowValidation("was-validated");
 
     const data = await post(inputData);
-    console.log(data);
+
+    if (!data) {
+      Swal.fire({
+        title: "Todo Mal",
+        text: "Hubo un error",
+        icon: "error",
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: "Todo ok",
+      text: "Usuario creado correctamente",
+      icon: "success",
+    });
   };
 
   return (
@@ -85,7 +100,7 @@ export default function Form() {
                 onChange={handleInputChange}
                 name="terms"
               />{" "}
-              <label class="form-check-label" for="invalidCheck">
+              <label class="form-check-label" htmlFor="invalidCheck">
                 Acepta los terminos y condiciones?
               </label>
             </div>
