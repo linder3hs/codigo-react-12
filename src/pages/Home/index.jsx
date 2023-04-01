@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Table from "../../components/Table";
+import EditUser from "../../components/EditUser";
 import { get } from "../../services";
 
 export default function Home() {
@@ -54,10 +55,22 @@ export default function Home() {
       key: "password",
     },
     {
-      text: "Terminos y Condiciones",
+      text: "Terminos",
       key: "terms",
       render: (row) => {
-        return <span>{row.terms ? "✅" : "❌"}</span>;
+        return <p className="text-center">{row.terms ? "✅" : "❌"}</p>;
+      },
+    },
+    {
+      text: "Acciones",
+      key: "id",
+      render: (row) => {
+        return (
+          <div className="d-flex justify-content-around">
+            <EditUser />
+            <button className="btn btn-dark">❌</button>
+          </div>
+        );
       },
     },
   ];

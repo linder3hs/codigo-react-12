@@ -4,7 +4,7 @@ export default function Table(props) {
   return (
     <div className="mt-5 table-responsive">
       <table className="table">
-        <thead className="table-dark">
+        <thead className="table-dark text-center">
           <tr>
             {columns.map((column) => (
               <th key={column.key}>{column.text}</th>
@@ -14,7 +14,7 @@ export default function Table(props) {
         <tbody>
           {rows.length > 0 &&
             rows.map((row) => (
-              <tr key={row.id}>
+              <tr key={row.id} className="text-center">
                 {columns.map((column) => (
                   <td key={row.id}>
                     {column.hasOwnProperty("render")
