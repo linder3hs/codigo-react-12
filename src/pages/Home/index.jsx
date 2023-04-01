@@ -67,7 +67,7 @@ export default function Home() {
       render: (row) => {
         return (
           <div className="d-flex justify-content-around">
-            <EditUser />
+            <EditUser id={row.id} fetchUsers={fetchUsers} />
             <button className="btn btn-dark">❌</button>
           </div>
         );

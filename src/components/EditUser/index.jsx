@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
+import { put } from "../../services";
 
-export default function EditUser() {
+export default function EditUser({ id, fetchUsers }) {
   const showEditModal = async () => {
     const { value: formValues } = await Swal.fire({
       title: "Editar usuario",
@@ -9,17 +10,27 @@ export default function EditUser() {
         <input id="swal-input3" placeholder="Password" class="swal2-input">`,
       focusConfirm: false,
       preConfirm: () => {
-        return [
-          document.getElementById("swal-input1").value,
-          document.getElementById("swal-input2").value,
-          document.getElementById("swal-input3").value,
-        ];
+        return {
+          name: document.getElementById("swal-input1").value,
+          email: document.getElementById("swal-input2").value,
+          password: document.getElementById("swal-input3").value,
+        };
       },
     });
 
-    if (formValues) {
-      Swal.fire(JSON.stringify(formValues));
+    // entendemos que formValues
+    const data = await put(id, formValues);
+
+    if (!data) {
+      Swal.fire({
+        text: "Hubo un error",
+        icon: "error",
+      });
+
+      return;
     }
+
+    await fetchUsers();
   };
 
   return (
