@@ -37,7 +37,7 @@ export default function Home() {
     },
     {
       text: "Avatar",
-      key: "avantar",
+      key: "avatar",
     },
     {
       text: "Password",
@@ -53,7 +53,7 @@ export default function Home() {
     <div className="container">
       <div className="mt-5">
         <h1>Lista de usuarios</h1>
-        <Table columns={columns} users={users} />
+        <Table columns={columns} rows={users} />
       </div>
     </div>
   );
