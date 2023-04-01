@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Table from "../../components/Table";
 import { get } from "../../services";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
+
+  const navigate = useNavigate();
 
   const fetchUsers = async () => {
     const data = await get();
@@ -19,6 +22,8 @@ export default function Home() {
     }
     setUsers(data);
   };
+
+  const redirectToCreateUser = () => navigate("/sign-up");
 
   useEffect(() => {
     fetchUsers();
@@ -60,7 +65,16 @@ export default function Home() {
   return (
     <div className="container">
       <div className="mt-5">
-        <h1>Lista de usuarios</h1>
+        <div className="row">
+          <div className="col-md-6">
+            <h1>Lista de usuarios</h1>
+          </div>
+          <div className="col-md-6 d-flex justify-content-end">
+            <button onClick={redirectToCreateUser} className="btn btn-warning">
+              Crear Usario
+            </button>
+          </div>
+        </div>
         <Table columns={columns} rows={users} />
       </div>
     </div>
