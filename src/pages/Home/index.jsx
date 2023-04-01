@@ -38,6 +38,11 @@ export default function Home() {
     {
       text: "Avatar",
       key: "avatar",
+      render: (row) => {
+        return (
+          <img className="rounded-circle" width={40} alt="" src={row.avatar} />
+        );
+      },
     },
     {
       text: "Password",
@@ -46,6 +51,9 @@ export default function Home() {
     {
       text: "Terminos y Condiciones",
       key: "terms",
+      render: (row) => {
+        return <span>{row.terms ? "✅" : "❌"}</span>;
+      },
     },
   ];
 

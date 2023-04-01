@@ -16,7 +16,11 @@ export default function Table(props) {
             rows.map((row) => (
               <tr key={row.id}>
                 {columns.map((column) => (
-                  <td>{row[column.key]}</td>
+                  <td key={row.id}>
+                    {column.hasOwnProperty("render")
+                      ? column.render(row)
+                      : row[column.key]}
+                  </td>
                 ))}
               </tr>
             ))}
@@ -25,18 +29,3 @@ export default function Table(props) {
     </div>
   );
 }
-
-{/* <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  <img
-                    className="rounded-circle"
-                    width={40}
-                    alt=""
-                    src={user.avatar}
-                  />
-                </td>
-                <td>{user.password}</td>
-                <th>{user.terms ? "✅" : "❌"} </th>
-              </tr> */}
