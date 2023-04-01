@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import Table from "../../components/Table";
 import { get } from "../../services";
 
 export default function Home() {
@@ -25,37 +26,34 @@ export default function Home() {
     // dentro de useEffect se ejecutura de forma infinita
   }, []);
 
+  const columns = [
+    {
+      text: "Nombre",
+      key: "name",
+    },
+    {
+      text: "Email",
+      key: "email",
+    },
+    {
+      text: "Avatar",
+      key: "avantar",
+    },
+    {
+      text: "Password",
+      key: "password",
+    },
+    {
+      text: "Terminos y Condiciones",
+      key: "terms",
+    },
+  ];
+
   return (
     <div className="container">
       <div className="mt-5">
         <h1>Lista de usuarios</h1>
-        <div className="mt-5 table-reponsive">
-          <table className="table">
-            <thead className="table-dark">
-              <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Avatar</th>
-                <th>Passowrd</th>
-                <th>Teminos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.length > 0 &&
-                users.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>
-                      <img className="rounded-circle" width={40} alt="" src={user.avatar} />
-                    </td>
-                    <td>{user.password}</td>
-                    <th>{user.terms ? "✅" : "❌"}  </th>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+        <Table columns={columns} users={users} />
       </div>
     </div>
   );
